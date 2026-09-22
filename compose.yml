@@ -1,7 +1,7 @@
 ---
 services:
-  db:
-    image: shaikmustafa/arshad:db
+  db:  
+    image: jayaprakashdevops/pythonapplication:dbimage
     deploy:
       replicas: 1
     ports:
@@ -10,7 +10,7 @@ services:
       - mynetwork
 
   auth_service:
-    image: shaikmustafa/arshad:auth
+    image: jayaprakashdevops/pythonapplication:authimage
     deploy:
       replicas: 1
     ports:
@@ -22,39 +22,24 @@ services:
     
 
   book_service:
-    image: shaikmustafa/arshad:book
+    image: jayaprakashdevops/pythonapplication:bookimage
     deploy:
       replicas: 1
     ports:
       - "5002:5002"
-    networks:
-      - mynetwork
-    depends_on:
-      - db
+      
   borrow_service:
-    image: shaikmustafa/arshad:borrow
+    image: jayaprakashdevops/pythonapplication:borrowimage
     deploy:
       replicas: 1
     ports:
       - "5003:5003"
-    networks:
-      - mynetwork
-    depends_on:
-      - db
 
   frontend:
-    image: shaikmustafa/arshad:frontend
+    image: jayaprakashdevops/pythonapplication:frontendimage
     deploy:
       replicas: 1
     ports:
       - "5000:5000"
-    networks:
-      - mynetwork
-    depends_on:
-      - auth_service
-      - book_service
-      - borrow_service
-
-networks:
-  mynetwork:
-    driver: bridge
+    
+    
